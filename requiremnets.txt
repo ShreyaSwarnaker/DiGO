@@ -1,0 +1,21 @@
+# Tested on Python 3.11.13, CUDA 11.8, Tesla V100-SXM2-32GB
+#
+# Install PyTorch first, matched to your CUDA version:
+#   pip install torch==2.4.1 --index-url https://download.pytorch.org/whl/cu118
+#
+# Then torch-scatter from the PyG wheel index for that exact build:
+#   pip install torch-scatter==2.1.2 -f https://data.pyg.org/whl/torch-2.4.0+cu118.html
+#
+# Then:
+#   pip install -r requirements.txt
+
+numpy==1.26.4
+pandas==2.3.2
+scikit-learn==1.8.0
+tqdm==4.67.3
+fair-esm==2.0.0
+torch-geometric==2.7.0
+
+# Listed for reference; install via the commands above, not from this file.
+# torch==2.4.1
+# torch-scatter==2.1.2
