@@ -1,0 +1,13 @@
+# Outputs and caches
+output/
+*.pt
+*.pth
+*.npy
+*.xlsx
+
+# Python
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
