@@ -67,7 +67,7 @@ if torch.cuda.is_available():
     torch.cuda.manual_seed(SEED)
 
 # ===========================================================================
-# SUPERMAGO evaluation  (IDENTICAL to esm7 / esm15)
+# Evaluation
 # ===========================================================================
 
 def get_ancestors(ontology, term):
@@ -226,7 +226,7 @@ def compute_metrics(y_true, y_prob, ic_dict, ontologies_names,
 
 
 # ===========================================================================
-# Data loading  (IDENTICAL to esm15)
+# Data loading  
 # ===========================================================================
 
 def load_csv_multilabel_data(file_path, seq_col=SEQ_COL, id_col=ID):
@@ -281,7 +281,7 @@ batch_converter = None
 
 
 # ===========================================================================
-# ESM multi-layer precomputation  (IDENTICAL to esm15)
+# ESM multi-layer precomputation  
 # ===========================================================================
 
 def precompute_esm_embeddings_multilayer(seqs, save_path, layers=ESM_LAYERS, batch_size=8):
@@ -341,7 +341,7 @@ def precompute_esm_embeddings_multilayer(seqs, save_path, layers=ESM_LAYERS, bat
 
 
 # ===========================================================================
-# GO adjacency  (IDENTICAL to esm15; unused in flat mode)
+# GO adjacency  
 # ===========================================================================
 
 def build_go_adjacency(label_names, go_obo_path):
@@ -366,7 +366,7 @@ def build_go_adjacency(label_names, go_obo_path):
 
 
 # ===========================================================================
-# Model components  (IDENTICAL to esm15)
+# Model components 
 # ===========================================================================
 
 class GOHierarchyLayer(torch.nn.Module):
@@ -398,7 +398,7 @@ class AATransformerLayer(torch.nn.Module):
 
 
 # ===========================================================================
-# Feature extraction  (IDENTICAL to esm15)
+# Feature extraction  
 # ===========================================================================
 
 def max_run_length(sequence, aa):
@@ -475,7 +475,7 @@ def get_feature_dim(mode=FEATURE_MODE):
 
 
 # ===========================================================================
-# Residue graph  (IDENTICAL to esm15)
+# Residue graph  
 # ===========================================================================
 
 def build_residue_graph(sequence, pe_dim=EMBEDDING_DIM):
@@ -505,7 +505,7 @@ class ResidueProteinEncoder(torch.nn.Module):
 
 
 # ===========================================================================
-# Graph building  (IDENTICAL to esm15)
+# Graph building  
 # ===========================================================================
 
 from torch_geometric.data import Data
@@ -558,7 +558,7 @@ from torch_geometric.loader import DataLoader
 
 
 # ===========================================================================
-# GCN  (IDENTICAL to esm15)
+# GCN  
 # ===========================================================================
 
 class DirectedGCNConv(MessagePassing):
@@ -613,15 +613,7 @@ class DirectedGCNConvEncoder(torch.nn.Module):
 
 
 # ===========================================================================
-# DiGAEClassifier
-#
-# CHANGE 1: USE_GCN_IN_CLASSIFIER = True  ->  clf_in uses
-#   [z_aa_mod | z_res_mod | z_esm_raw]  (gcn_flat + embedding_dim + esm_raw_dim)
-#   instead of esm15's [z_esm_raw | z_res_mod] only.
-#
-# CHANGE 2: esm_direct branch REMOVED.
-#   esm15:  logits = self.classifier(clf_in) + self.esm_direct(z_esm_raw)
-#   here:   logits = self.classifier(clf_in)          <-  l_hat_main only
+#  Classifier
 # ===========================================================================
 
 class DiGAEClassifier(torch.nn.Module):
@@ -717,7 +709,7 @@ class DiGAEClassifier(torch.nn.Module):
 
 
 # ===========================================================================
-# Loss  (IDENTICAL to esm15 - label smoothing BCE)
+# Loss  
 # ===========================================================================
 
 def bce_label_smooth(logits, targets, eps=LABEL_SMOOTH):
@@ -728,7 +720,7 @@ def bce_label_smooth(logits, targets, eps=LABEL_SMOOTH):
 
 
 # ===========================================================================
-# Training helpers  (IDENTICAL to esm15)
+# Training helpers  
 # ===========================================================================
 
 def train_epoch(model, loader, optimizer, device):
@@ -780,7 +772,7 @@ def save_checkpoint(model, optimizer, scheduler, epoch, best_val, path):
 
 
 # ===========================================================================
-# Main  (IDENTICAL to esm15 - flat multi-label mode, no ontology file)
+# Main  (flat multi-label mode, no ontology file)
 # ===========================================================================
 
 def main():
