@@ -15,6 +15,7 @@ scikit-learn==1.8.0
 tqdm==4.67.3
 fair-esm==2.0.0
 torch-geometric==2.7.0
+openpyxl==3.1.5
 
 # Listed for reference; install via the commands above, not from this file.
 # torch==2.4.1
